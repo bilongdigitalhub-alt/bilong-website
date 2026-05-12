@@ -11,9 +11,9 @@ limiter = Limiter(key_func=get_remote_address)
 # ── ALLOWED ORIGINS ──────────────────────────────────────────────────────────
 ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "http://localhost:3000",
+    "https://bilong-website.vercel.app",
     "https://bilongdigitalhub.com",
-    "https://www.bilongdigitalhub.com",
+],
 ]
 
 def setup_cors(app):
