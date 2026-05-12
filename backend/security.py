@@ -14,7 +14,6 @@ ALLOWED_ORIGINS = [
     "https://bilong-website.vercel.app",
     "https://bilongdigitalhub.com",
 ],
-]
 
 def setup_cors(app):
     app.add_middleware(
