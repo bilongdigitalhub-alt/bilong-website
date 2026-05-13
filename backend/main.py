@@ -6,21 +6,21 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from pydantic import BaseModel
-import anthropic
+import google.generativeai as genai
 import os
 from dotenv import load_dotenv
- 
+
 load_dotenv()
- 
+
 limiter = Limiter(key_func=get_remote_address)
- 
+
 ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "https://bilong-website.vercel.app",
     "https://bilongdigitalhub.com",
     "https://www.bilongdigitalhub.com",
 ]
- 
+
 DANGEROUS_PATTERNS = [
     r"<script.*?>.*?</script>",
     r"javascript:",
@@ -34,7 +34,7 @@ DANGEROUS_PATTERNS = [
     r"exec\s*\(",
     r"eval\s*\(",
 ]
- 
+
 def sanitize_input(text: str) -> str:
     if not text:
         return ""
@@ -43,16 +43,16 @@ def sanitize_input(text: str) -> str:
         if re.search(pattern, text, re.IGNORECASE):
             raise HTTPException(status_code=400, detail="Invalid input detected")
     return text
- 
+
 def validate_email(email: str) -> bool:
     pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     return bool(re.match(pattern, email))
- 
+
 def validate_message_length(text: str, max_length: int = 1000) -> str:
     if len(text) > max_length:
         raise HTTPException(status_code=400, detail=f"Input too long. Max {max_length} characters.")
     return text
- 
+
 async def add_security_headers(request: Request, call_next):
     response = await call_next(request)
     response.headers["X-Content-Type-Options"] = "nosniff"
@@ -62,28 +62,28 @@ async def add_security_headers(request: Request, call_next):
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     response.headers["Cache-Control"] = "no-store"
     return response
- 
+
 BLOCKED_IPS = set()
- 
+
 async def check_blocked_ip(request: Request, call_next):
     client_ip = request.client.host
     if client_ip in BLOCKED_IPS:
         raise HTTPException(status_code=403, detail="Access denied")
     return await call_next(request)
- 
+
 async def limit_request_size(request: Request, call_next):
     content_length = request.headers.get("content-length")
     if content_length and int(content_length) > 10000:
         raise HTTPException(status_code=413, detail="Request too large")
     return await call_next(request)
- 
+
 app = FastAPI(title="BILONG DIGITAL HUB API", docs_url=None, redoc_url=None)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.middleware("http")(add_security_headers)
 app.middleware("http")(check_blocked_ip)
 app.middleware("http")(limit_request_size)
- 
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
@@ -91,16 +91,16 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type", "Authorization"],
 )
- 
-api_key = os.getenv("ANTHROPIC_API_KEY")
+
+api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
-    raise RuntimeError("ANTHROPIC_API_KEY not found")
-client = anthropic.Anthropic(api_key=api_key)
- 
-BILONG_SYSTEM_PROMPT = """
-You are BILONG AI, the official AI marketing assistant for BILONG DIGITAL HUB,
+    raise RuntimeError("GEMINI_API_KEY not found")
+genai.configure(api_key=api_key)
+model = genai.GenerativeModel(
+    model_name="gemini-1.5-flash",
+    system_instruction="""You are BILONG AI, the official AI marketing assistant for BILONG DIGITAL HUB,
 a digital marketing agency founded by Olawumi Micheal Damilare in Nigeria.
- 
+
 ABOUT BILONG DIGITAL HUB:
 - Full-service digital marketing agency based in Nigeria serving all of Africa
 - The agency that serves businesses big agencies ignore
@@ -113,37 +113,37 @@ ABOUT BILONG DIGITAL HUB:
 - Brand pillars: Educate. Innovate. Elevate. Connect.
 - WhatsApp: +234 815 368 7589
 - Email: bilongdigitalhub@gmail.com
- 
+
 ORIGINAL FRAMEWORKS:
 1. Scale of Preference in Marketing - Speak to customer's #1 pain first
 2. Favorable vs Unfavorable Discount - Not all discounts grow your business
 3. The Cost of Silence in Business - Silence online costs you customers daily
- 
+
 RULES:
 - Answer marketing questions helpfully and practically
 - Use frameworks when relevant
 - Recommend BILONG services naturally
 - Keep responses concise and encouraging
-- Never mention competitor agencies
-"""
- 
+- Never mention competitor agencies"""
+)
+
 class ChatMessage(BaseModel):
     message: str
- 
+
 class ContactForm(BaseModel):
     name: str
     email: str
     business: str
     message: str
- 
+
 @app.get("/")
 def root():
     return {"status": "BILONG DIGITAL HUB API is running"}
- 
+
 @app.get("/api/health")
 def health():
     return {"status": "healthy"}
- 
+
 @app.post("/api/chat")
 @limiter.limit("10/minute")
 async def chat(request: Request, body: ChatMessage):
@@ -152,16 +152,11 @@ async def chat(request: Request, body: ChatMessage):
     message = sanitize_input(body.message)
     message = validate_message_length(message, 1000)
     try:
-        response = client.messages.create(
-            model="claude-haiku-4-5-20251001",
-            max_tokens=1024,
-            system=BILONG_SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": message}]
-        )
-        return {"response": response.content[0].text}
+        response = model.generate_content(message)
+        return {"response": response.text}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
- 
+
 @app.post("/api/contact")
 @limiter.limit("3/minute")
 async def contact(request: Request, form: ContactForm):
@@ -179,3 +174,4 @@ async def contact(request: Request, form: ContactForm):
         "status": "success",
         "message": f"Thank you {name}! We will contact you within 24 hours."
     }
+
