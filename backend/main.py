@@ -6,7 +6,8 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from pydantic import BaseModel
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 import os
 from dotenv import load_dotenv
 
@@ -95,10 +96,10 @@ app.add_middleware(
 api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
     raise RuntimeError("GEMINI_API_KEY not found")
-genai.configure(api_key=api_key)
-model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
-    system_instruction="""You are BILONG AI, the official AI marketing assistant for BILONG DIGITAL HUB,
+
+client = genai.Client(api_key=api_key)
+
+SYSTEM_PROMPT = """You are BILONG AI, the official AI marketing assistant for BILONG DIGITAL HUB,
 a digital marketing agency founded by Olawumi Micheal Damilare in Nigeria.
 
 ABOUT BILONG DIGITAL HUB:
@@ -125,7 +126,6 @@ RULES:
 - Recommend BILONG services naturally
 - Keep responses concise and encouraging
 - Never mention competitor agencies"""
-)
 
 class ChatMessage(BaseModel):
     message: str
@@ -152,7 +152,14 @@ async def chat(request: Request, body: ChatMessage):
     message = sanitize_input(body.message)
     message = validate_message_length(message, 1000)
     try:
-        response = model.generate_content(message)
+        response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=message,
+            config=types.GenerateContentConfig(
+                system_instruction=SYSTEM_PROMPT,
+                max_output_tokens=1024,
+            )
+        )
         return {"response": response.text}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
