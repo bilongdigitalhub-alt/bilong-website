@@ -153,7 +153,7 @@ async def chat(request: Request, body: ChatMessage):
     message = validate_message_length(message, 1000)
     try:
         response = client.models.generate_content(
-            model="gemini-2.0-flash",
+           model="gemini-1.5-flash",
             contents=message,
             config=types.GenerateContentConfig(
                 system_instruction=SYSTEM_PROMPT,
