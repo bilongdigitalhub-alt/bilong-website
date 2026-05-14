@@ -106,7 +106,7 @@ ABOUT BILONG DIGITAL HUB:
 - Full-service digital marketing agency based in Nigeria serving all of Africa
 - The agency that serves businesses big agencies ignore
 - Services: Social Media Management (from N25,000/month), Paid Advertising
-  (from N20,000/month), Website Development (from N50,000), AI Automation
+  (from N150,000/month), Website Development (from N50,000), AI Automation
   (from N30,000), Digital Marketing Training (from N12,000), Marketing
   Consultation (from N10,000/session), Traditional Marketing (from N8,000),
   Full Digital Campaigns (from N60,000/month)
