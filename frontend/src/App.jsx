@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const API = "https://your-exact-render-url.onrender.com";
+const API = "https://bilong-backend.onrender.com";
 
 const NAV_LINKS = ["Home", "About", "Services", "AI Assistant", "Training", "Contact"];
 
