@@ -6,27 +6,99 @@ const API = "https://bilong-backend.onrender.com";
 const NAV_LINKS = ["Home", "About", "Services", "AI Assistant", "Training", "Contact"];
 
 const SERVICES = [
-  { icon: "📱", name: "Social Media Management", desc: "Full management of Facebook, Instagram, LinkedIn & WhatsApp. Content, graphics, scheduling & community.", price: "From ₦25,000/month" },
-  { icon: "📣", name: "Paid Advertising", desc: "Facebook, Instagram & Google ad campaigns strategically built to convert views into customers.", price: "From ₦20,000/month" },
-  { icon: "🌐", name: "Website Development", desc: "Professional, SEO-ready, mobile-optimised websites that represent your brand 24/7.", price: "From ₦50,000" },
-  { icon: "🤖", name: "AI Automation", desc: "ChatGPT & Claude automations for content creation, customer responses & business workflows.", price: "From ₦30,000" },
-  { icon: "🎓", name: "Digital Marketing Training", desc: "Beginner to advanced courses. Learn social media, ads, AI tools & digital strategy.", price: "From ₦12,000" },
-  { icon: "💡", name: "Marketing Consultation", desc: "1-on-1 strategy sessions. Walk away with a clear marketing roadmap for your business.", price: "From ₦10,000/session" },
-  { icon: "📰", name: "Traditional Marketing", desc: "Flyers, banners, print design & community-based campaigns that reach offline audiences.", price: "From ₦8,000" },
-  { icon: "🚀", name: "Full Digital Campaigns", desc: "End-to-end campaign management across all platforms. Strategy, execution & reporting.", price: "From ₦60,000/month" },
-];
-
-const FRAMEWORKS = [
-  { num: "01", title: "Scale of Preference in Marketing", desc: "Every customer has a mental priority list. Speak to their #1 pain to position your offer as the most urgent need — and sales will follow." },
-  { num: "02", title: "Favorable vs Unfavorable Discount", desc: "Not all discounts grow your business. Some attract the wrong customers and devalue your brand. Learn the difference before you cut your price." },
-  { num: "03", title: "The Cost of Silence in Business", desc: "Every day your business is not communicating online, you are losing customers to competitors who are. Silence is not neutral — it is costly." },
+  { 
+    icon: "📱", 
+    name: "Digital Marketing Service", 
+    desc: "Full-scale digital marketing solutions to grow your brand online:",
+    items: ["Social Media Management", "Email Marketing", "SEO & Search Optimization", "Website Optimization", "Content Marketing", "Community Management", "Brand Strategy & Voice", "Analytics & Reporting"]
+  },
+  { 
+    icon: "📣", 
+    name: "Paid Advertising", 
+    desc: "Strategic ad campaigns built to convert views into customers:",
+    items: ["Facebook & Instagram Ads", "Google Ads", "Meta Ads", "Campaign Optimization", "A/B Testing", "Performance Reporting"]
+  },
+  { 
+    icon: "🌐", 
+    name: "Website Development", 
+    desc: "Professional websites that represent your brand 24/7:",
+    items: ["Business Websites", "E-commerce Stores", "Landing Pages", "Mobile Optimized", "SEO Ready", "Fast & Secure"]
+  },
+  { 
+    icon: "🤖", 
+    name: "AI Training", 
+    desc: "Master AI tools to grow and automate your business:",
+    items: ["ChatGPT & Claude Mastery", "AI Content Creation", "Chatbots & Automation", "Workflow Optimization", "AI for Marketing", "Business Productivity with AI"]
+  },
+  { 
+    icon: "📚", 
+    name: "eBook Publishing", 
+    desc: "We help you write, publish and market your eBook professionally:",
+    items: ["eBook Writing Assistance", "Professional Formatting", "Cover Design", "Publishing Strategy", "Marketing Your eBook", "Digital Distribution"]
+  },
+  { 
+    icon: "💡", 
+    name: "Marketing Consultation", 
+    desc: "1-on-1 strategy sessions that give your business a clear direction:",
+    items: ["Business Analysis", "Marketing Roadmap", "Strategy Planning", "Growth Consulting", "Brand Positioning", "Priority WhatsApp Access"]
+  },
 ];
 
 const TRAINING = [
-  { title: "Digital Marketing Beginners Course", sessions: "4 Sessions", price: "₦15,000", items: ["Foundations of digital marketing", "Social media basics", "Content creation", "Certificate included"] },
-  { title: "Intermediate Marketing Course", sessions: "6 Sessions", price: "₦25,000", items: ["Strategy & analytics", "Paid advertising", "Email marketing", "Practical assignments + Certificate"] },
-  { title: "Complete Marketing Masterclass", sessions: "10 Sessions", price: "₦40,000", items: ["Beginner to advanced", "All platforms covered", "1-on-1 support included", "Certificate included"] },
-  { title: "AI Tools for Business", sessions: "3 Sessions", price: "₦12,000", items: ["ChatGPT & Claude mastery", "AI content creation", "Automation setup", "Certificate included"] },
+  { 
+    title: "STARTER PLAN", 
+    subtitle: "For beginners with zero experience",
+    items: [
+      "Introduction to Digital Marketing",
+      "Social Media Basics & Content Creation",
+      "Understanding Your Target Audience",
+      "Basic Graphic Design for Marketing",
+      "Introduction to Email Marketing",
+      "How to Build Your Online Presence",
+      "Certificate included"
+    ],
+    bestFor: "Complete beginners who want to start their digital marketing journey",
+    featured: false
+  },
+  { 
+    title: "GROWTH PLAN", 
+    subtitle: "For students ready to go deeper and handle real clients",
+    note: "Basic plan will also be covered for students who do not have the basic knowledge",
+    items: [
+      "Everything in Starter Plan PLUS:",
+      "Digital Marketing Strategy & Planning",
+      "Content Marketing & Storytelling",
+      "Email Marketing",
+      "Website Optimization basics (SEO)",
+      "Audience Research & Buyer Persona",
+      "Analytics & Reporting",
+      "Community Management",
+      "Brand Identity & Voice",
+      "How to get and manage clients",
+      "Certificate included"
+    ],
+    bestFor: "Students who already know the basics and want to handle real digital marketing work professionally",
+    featured: false
+  },
+  { 
+    title: "PRO PLAN", 
+    subtitle: "For serious students who want to master digital marketing completely",
+    items: [
+      "Everything in Growth Plan PLUS:",
+      "Full Digital Marketing & E-commerce Curriculum",
+      "AI Automation — chatbots, workflows, scheduling tools",
+      "Advanced Paid Advertising — Google Ads, Meta Ads, campaign optimization",
+      "Advanced SEO & Website Optimization",
+      "Influencer & Affiliate Marketing",
+      "Marketing Funnels & Sales Strategy",
+      "Real World Case Studies — analyzing real brand campaigns",
+      "Practical Examples & Live Projects",
+      "How to start and run your own digital marketing agency",
+      "Certificate included"
+    ],
+    bestFor: "Students who want to become full professional digital marketers or start their own agency",
+    featured: true
+  },
 ];
 
 export default function App() {
@@ -38,7 +110,6 @@ export default function App() {
   const [chatLoading, setChatLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", business: "", message: "" });
   const [formStatus, setFormStatus] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
 
   const sendChat = async () => {
     if (!chatInput.trim() || chatLoading) return;
@@ -56,26 +127,20 @@ export default function App() {
   };
 
   const sendForm = async () => {
-    if (!form.name || !form.email || !form.business || !form.message) {
-      setFormStatus("error");
-      return;
-    }
+    if (!form.name || !form.email || !form.business || !form.message) { setFormStatus("error"); return; }
     try {
-      const res = await axios.post(`${API}/api/contact`, form);
+      await axios.post(`${API}/api/contact`, form);
       setFormStatus("success");
       setForm({ name: "", email: "", business: "", message: "" });
-    } catch {
-      setFormStatus("error");
-    }
+    } catch { setFormStatus("error"); }
   };
 
   return (
     <div style={styles.app}>
-      {/* NAVBAR */}
       <nav style={styles.nav}>
         <div style={styles.navInner}>
           <div style={styles.navBrand}>
-            <span style={styles.navLogo}>⚡</span>
+            <img src="/bilong_real_logo.jpg" alt="BILONG Logo" style={styles.navLogoImg} />
             <div>
               <div style={styles.navName}>BILONG DIGITAL HUB</div>
               <div style={styles.navSub}>Your #1 Digital Marketing Agency</div>
@@ -89,39 +154,31 @@ export default function App() {
               </button>
             ))}
           </div>
-          <a href="https://wa.me/2348153687589" target="_blank" style={styles.navCta}>
-            WhatsApp Us
-          </a>
+          <a href="https://wa.me/2348153687589" target="_blank" style={styles.navCta}>WhatsApp Us</a>
         </div>
       </nav>
 
-      {/* PAGES */}
       <main style={styles.main}>
 
-        {/* ── HOME ── */}
         {active === "Home" && (
           <div>
-            {/* Hero */}
             <section style={styles.hero}>
               <div style={styles.heroInner}>
-                <div style={styles.heroBadge}>🇳🇬 Nigeria's Gap-Filling Agency</div>
+                <img src="/bilong_real_logo.jpg" alt="BILONG Logo" style={styles.heroLogo} />
+                <div style={styles.heroBadge}>🌍 Global Digital Marketing Agency</div>
                 <h1 style={styles.heroTitle}>
-                  We Serve The Businesses<br />
-                  <span style={styles.heroBlue}>Big Agencies Ignore.</span>
+                  Grow Your Business<br />
+                  <span style={styles.heroBlue}>Anywhere In The World.</span>
                 </h1>
                 <p style={styles.heroSub}>
-                  While top agencies fight over Lagos boardrooms, BILONG DIGITAL HUB is building every Nigerian and African business that deserves to grow. Social media, websites, AI automation, training — all in one place, at prices that make sense.
+                  BILONG DIGITAL HUB delivers world-class digital marketing, AI training, website development, eBook publishing and professional training to businesses globally. We create social media accounts and websites to advertise and support every business that comes to us.
                 </p>
                 <div style={styles.heroButtons}>
-                  <button onClick={() => setActive("AI Assistant")} style={styles.btnPrimary}>
-                    Ask Our AI Assistant
-                  </button>
-                  <button onClick={() => setActive("Services")} style={styles.btnSecondary}>
-                    See Our Services
-                  </button>
+                  <button onClick={() => setActive("AI Assistant")} style={styles.btnPrimary}>Ask Our AI Assistant</button>
+                  <button onClick={() => setActive("Services")} style={styles.btnSecondary}>See Our Services</button>
                 </div>
                 <div style={styles.heroStats}>
-                  {[["8+", "Services"], ["3", "Original Frameworks"], ["₦8K", "Starting Price"], ["🌍", "Pan-African"]].map(([num, label]) => (
+                  {[["6+", "Services"], ["📚", "eBooks"], ["🌍", "Worldwide"], ["🤖", "AI-Powered"]].map(([num, label]) => (
                     <div key={label} style={styles.heroStat}>
                       <div style={styles.heroStatNum}>{num}</div>
                       <div style={styles.heroStatLabel}>{label}</div>
@@ -131,19 +188,18 @@ export default function App() {
               </div>
             </section>
 
-            {/* Gap Section */}
             <section style={styles.section}>
               <div style={styles.sectionInner}>
                 <div style={styles.sectionLabel}>The Gap We Are Filling</div>
-                <h2 style={styles.sectionTitle}>What Big Agencies Are Leaving Behind</h2>
+                <h2 style={styles.sectionTitle}>What Most Agencies Are Leaving Behind</h2>
                 <div style={styles.gapGrid}>
                   {[
-                    ["🏢", "Big Agencies Ignore SMEs", "Every top agency chases enterprise clients. The 95% of Nigerian small businesses that need marketing help have nobody speaking to them."],
-                    ["🤖", "AI Is For Everyone", "Large agencies talk about AI but don't bring it to small businesses. BILONG delivers Claude & ChatGPT automation to every Nigerian business."],
-                    ["📚", "Education + Execution", "We don't just do the work — we train you too. No other agency in Nigeria combines teaching and delivering in one package."],
-                    ["📱", "WhatsApp-First Marketing", "Big agencies ignore WhatsApp. We master it. Nigeria's #1 communication tool is also your #1 marketing channel."],
-                    ["🗺️", "Beyond Lagos", "Every top agency is Victoria Island only. BILONG serves Oyo, Ibadan, Abeokuta, Enugu, and all of Africa professionally."],
-                    ["💰", "Affordable Quality", "Premium digital marketing should not cost a fortune. We deliver world-class results at prices Nigerian businesses can afford."],
+                    ["🏢", "SMEs Are Ignored", "Most agencies chase big brands. BILONG serves every business — small, medium, startup — with the same world-class quality."],
+                    ["🤖", "AI For Every Business", "We bring AI tools and training to businesses that need it most, not just big corporations."],
+                    ["📚", "Education + Execution", "We don't just do the work — we train you too. No other agency combines teaching and delivering in one package."],
+                    ["📱", "Social Media & Website Support", "We create and manage your social media accounts and website to advertise and support your business throughout our contract."],
+                    ["🌍", "Serving The World", "We are not limited to any one country or continent. BILONG serves businesses globally."],
+                    ["📖", "eBook Publishing", "We help you write and publish your eBook. Your knowledge deserves to reach the world."],
                   ].map(([icon, title, desc]) => (
                     <div key={title} style={styles.gapCard}>
                       <span style={styles.gapIcon}>{icon}</span>
@@ -155,45 +211,24 @@ export default function App() {
               </div>
             </section>
 
-            {/* Frameworks Preview */}
-            <section style={{ ...styles.section, background: "#0A2342" }}>
-              <div style={styles.sectionInner}>
-                <div style={{ ...styles.sectionLabel, color: "#1E90FF" }}>Original Marketing Frameworks</div>
-                <h2 style={{ ...styles.sectionTitle, color: "#fff" }}>Built From Research. Proven By Results.</h2>
-                <div style={styles.fwGrid}>
-                  {FRAMEWORKS.map(fw => (
-                    <div key={fw.num} style={styles.fwCard}>
-                      <div style={styles.fwNum}>{fw.num}</div>
-                      <div style={styles.fwTitle}>{fw.title}</div>
-                      <div style={styles.fwDesc}>{fw.desc}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* CTA */}
             <section style={styles.ctaSection}>
               <h2 style={styles.ctaTitle}>Ready to Grow Your Business?</h2>
               <p style={styles.ctaSub}>Free 15-minute strategy call. No obligation. Just results.</p>
               <div style={styles.heroButtons}>
-                <a href="https://wa.me/2348153687589?text=Hello%20I%20want%20to%20grow%20my%20business" target="_blank" style={styles.btnPrimary}>
-                  Book Free Call on WhatsApp
-                </a>
+                <a href="https://wa.me/2348153687589?text=Hello%20I%20want%20to%20grow%20my%20business" target="_blank" style={styles.btnPrimary}>Book Free Call on WhatsApp</a>
                 <button onClick={() => setActive("Contact")} style={styles.btnSecondary}>Send Us a Message</button>
               </div>
             </section>
           </div>
         )}
 
-        {/* ── ABOUT ── */}
         {active === "About" && (
           <div>
             <section style={styles.hero}>
               <div style={styles.heroInner}>
                 <div style={styles.heroBadge}>Our Story</div>
-                <h1 style={styles.heroTitle}>Built For The <span style={styles.heroBlue}>Businesses That Matter Most.</span></h1>
-                <p style={styles.heroSub}>BILONG DIGITAL HUB was founded by Olawumi Micheal Damilare with one clear mission — to give every Nigerian and African business access to world-class digital marketing, regardless of their size or budget.</p>
+                <h1 style={styles.heroTitle}>Built For Every Business<br/><span style={styles.heroBlue}>That Deserves To Grow.</span></h1>
+                <p style={styles.heroSub}>BILONG DIGITAL HUB was founded by Olawumi Micheal Damilare with one clear mission — to give every business across the world access to world-class digital marketing, regardless of their size or location.</p>
               </div>
             </section>
             <section style={styles.section}>
@@ -201,9 +236,9 @@ export default function App() {
                 <div style={styles.aboutGrid}>
                   <div>
                     <h2 style={styles.sectionTitle}>Our Vision</h2>
-                    <p style={styles.aboutText}>To become Africa's most trusted digital marketing agency — known not just for results, but for educating and elevating every business we touch.</p>
+                    <p style={styles.aboutText}>To become the world's most trusted digital marketing agency — known not just for results, but for educating and elevating every business we touch.</p>
                     <h2 style={{ ...styles.sectionTitle, marginTop: 32 }}>Our Mission</h2>
-                    <p style={styles.aboutText}>To bridge the digital marketing gap for Nigerian and African SMEs by combining education, innovation, and execution in a way no other agency does.</p>
+                    <p style={styles.aboutText}>To bridge the digital marketing gap for businesses worldwide by combining education, innovation, and execution in a way no other agency does. We create social media accounts and websites to advertise and support every client throughout our contract.</p>
                     <h2 style={{ ...styles.sectionTitle, marginTop: 32 }}>Our Pillars</h2>
                     <div style={styles.pillars}>
                       {["Educate", "Innovate", "Elevate", "Connect"].map(p => (
@@ -212,13 +247,19 @@ export default function App() {
                     </div>
                   </div>
                   <div>
-                    <h2 style={styles.sectionTitle}>Our Frameworks</h2>
-                    {FRAMEWORKS.map(fw => (
-                      <div key={fw.num} style={styles.aboutFw}>
-                        <div style={styles.aboutFwNum}>{fw.num}</div>
+                    <h2 style={styles.sectionTitle}>What Makes Us Different</h2>
+                    {[
+                      ["🌍", "Global Reach", "We serve businesses worldwide — not limited to any region or country."],
+                      ["📚", "eBook Publishing", "We help individuals and businesses write, publish and market their eBooks professionally."],
+                      ["🎓", "Education + Execution", "We train you AND do the work for you — unique in the industry."],
+                      ["🤖", "AI-Powered Training", "We integrate the latest AI tools to give your business a competitive edge."],
+                      ["📱", "Social Media & Website Support", "Every client gets their social media and website managed and promoted throughout our contract."],
+                    ].map(([icon, title, desc]) => (
+                      <div key={title} style={styles.aboutFw}>
+                        <span style={{ fontSize: 28, flexShrink: 0 }}>{icon}</span>
                         <div>
-                          <div style={styles.aboutFwTitle}>{fw.title}</div>
-                          <div style={styles.gapDesc}>{fw.desc}</div>
+                          <div style={styles.aboutFwTitle}>{title}</div>
+                          <div style={styles.gapDesc}>{desc}</div>
                         </div>
                       </div>
                     ))}
@@ -229,14 +270,13 @@ export default function App() {
           </div>
         )}
 
-        {/* ── SERVICES ── */}
         {active === "Services" && (
           <div>
             <section style={styles.hero}>
               <div style={styles.heroInner}>
                 <div style={styles.heroBadge}>What We Offer</div>
-                <h1 style={styles.heroTitle}>8 Services. <span style={styles.heroBlue}>One Agency.</span></h1>
-                <p style={styles.heroSub}>Everything your business needs to grow digitally — under one roof, at prices that work for Nigerian businesses.</p>
+                <h1 style={styles.heroTitle}>6 Services. <span style={styles.heroBlue}>One Agency.</span></h1>
+                <p style={styles.heroSub}>Everything your business needs to grow digitally — under one roof, serving businesses worldwide. Contact us for pricing tailored to your needs.</p>
               </div>
             </section>
             <section style={styles.section}>
@@ -247,40 +287,46 @@ export default function App() {
                       <span style={styles.serviceIcon}>{s.icon}</span>
                       <div style={styles.serviceName}>{s.name}</div>
                       <div style={styles.serviceDesc}>{s.desc}</div>
-                      <div style={styles.servicePrice}>{s.price}</div>
+                      <ul style={styles.serviceList}>
+                        {s.items.map(item => (
+                          <li key={item} style={styles.serviceItem}>✅ {item}</li>
+                        ))}
+                      </ul>
                       <a href="https://wa.me/2348153687589" target="_blank" style={styles.serviceBtn}>Get Started →</a>
                     </div>
                   ))}
+                </div>
+                <div style={styles.serviceNote}>
+                  📞 Contact us on WhatsApp for custom pricing tailored to your business needs and budget.
                 </div>
               </div>
             </section>
           </div>
         )}
 
-        {/* ── AI ASSISTANT ── */}
         {active === "AI Assistant" && (
           <div>
             <section style={styles.hero}>
               <div style={styles.heroInner}>
-                <div style={styles.heroBadge}>🤖 Powered by Claude AI</div>
+                <div style={styles.heroBadge}>🤖 AI-Powered Assistant</div>
                 <h1 style={styles.heroTitle}>Meet <span style={styles.heroBlue}>BILONG AI</span></h1>
-                <p style={styles.heroSub}>Nigeria's first agency AI assistant. Ask any marketing question and get expert answers built on BILONG's original frameworks — free, instant, no sign-up needed.</p>
+                <p style={styles.heroSub}>Ask any marketing question and get expert answers instantly — free, no sign-up needed.</p>
               </div>
             </section>
             <section style={styles.section}>
               <div style={{ ...styles.sectionInner, maxWidth: 720 }}>
                 <div style={styles.chatBox}>
                   <div style={styles.chatHeader}>
-                    <span>🤖</span>
+                    <img src="/bilong_real_logo.jpg" alt="logo" style={{ width: 40, height: 40, borderRadius: 8, objectFit: "cover" }} />
                     <div>
                       <div style={styles.chatHeaderName}>BILONG AI Assistant</div>
-                      <div style={styles.chatHeaderSub}>Powered by Claude · Online</div>
+                      <div style={styles.chatHeaderSub}>Powered by AI · Online</div>
                     </div>
                   </div>
                   <div style={styles.chatMessages}>
                     {chatMessages.map((msg, i) => (
                       <div key={i} style={{ ...styles.chatMsg, ...(msg.role === "user" ? styles.chatMsgUser : styles.chatMsgAI) }}>
-                        {msg.role === "assistant" && <span style={styles.chatAvatar}>🤖</span>}
+                        {msg.role === "assistant" && <img src="/bilong_real_logo.jpg" alt="logo" style={styles.chatAvatar} />}
                         <div style={{ ...styles.chatBubble, ...(msg.role === "user" ? styles.chatBubbleUser : styles.chatBubbleAI) }}>
                           {msg.text}
                         </div>
@@ -288,25 +334,22 @@ export default function App() {
                     ))}
                     {chatLoading && (
                       <div style={styles.chatMsg}>
-                        <span style={styles.chatAvatar}>🤖</span>
+                        <img src="/bilong_real_logo.jpg" alt="logo" style={styles.chatAvatar} />
                         <div style={styles.chatBubbleAI}>Thinking...</div>
                       </div>
                     )}
                   </div>
                   <div style={styles.chatInputRow}>
-                    <input
-                      style={styles.chatInput}
-                      value={chatInput}
+                    <input style={styles.chatInput} value={chatInput}
                       onChange={e => setChatInput(e.target.value)}
                       onKeyDown={e => e.key === "Enter" && sendChat()}
-                      placeholder="Ask me anything about marketing..."
-                    />
+                      placeholder="Ask me anything about marketing..." />
                     <button onClick={sendChat} style={styles.chatSend}>Send</button>
                   </div>
                 </div>
                 <div style={styles.chatSuggestions}>
-                  {["How do I get more customers?", "What is the Scale of Preference?", "How much does social media management cost?", "How do I use AI for my business?"].map(q => (
-                    <button key={q} onClick={() => { setChatInput(q); }} style={styles.chatSugBtn}>{q}</button>
+                  {["How do I get more customers?", "What is digital marketing?", "How do I grow on social media?", "How can AI help my business?"].map(q => (
+                    <button key={q} onClick={() => setChatInput(q)} style={styles.chatSugBtn}>{q}</button>
                   ))}
                 </div>
               </div>
@@ -314,29 +357,30 @@ export default function App() {
           </div>
         )}
 
-        {/* ── TRAINING ── */}
         {active === "Training" && (
           <div>
             <section style={styles.hero}>
               <div style={styles.heroInner}>
-                <div style={styles.heroBadge}>🎓 Learn From Experts</div>
+                <div style={styles.heroBadge}>🎓 Professional Training</div>
                 <h1 style={styles.heroTitle}>We Don't Just Do It. <span style={styles.heroBlue}>We Teach It.</span></h1>
-                <p style={styles.heroSub}>No other agency in Nigeria trains you AND executes for you. Our courses take you from zero to confident in digital marketing and AI tools.</p>
+                <p style={styles.heroSub}>From complete beginner to professional digital marketer. Choose the plan that fits your level and goals. Contact us on WhatsApp for pricing.</p>
               </div>
             </section>
             <section style={styles.section}>
               <div style={styles.sectionInner}>
                 <div style={styles.trainingGrid}>
-                  {TRAINING.map(t => (
-                    <div key={t.title} style={styles.trainingCard}>
-                      <div style={styles.trainingPrice}>{t.price}</div>
+                  {TRAINING.map((t) => (
+                    <div key={t.title} style={{ ...styles.trainingCard, ...(t.featured ? styles.trainingCardFeatured : {}) }}>
+                      {t.featured && <div style={styles.trainingBadge}>⭐ MOST COMPLETE</div>}
                       <div style={styles.trainingTitle}>{t.title}</div>
-                      <div style={styles.trainingSessions}>{t.sessions}</div>
+                      <div style={styles.trainingSub}>{t.subtitle}</div>
                       <div style={styles.trainingItems}>
                         {t.items.map(item => (
-                          <div key={item} style={styles.trainingItem}>✅ {item}</div>
+                          <div key={item} style={styles.trainingItem}>👉 {item}</div>
                         ))}
                       </div>
+                      {t.note && <div style={styles.trainingNote}>📌 Note: {t.note}</div>}
+                      <div style={styles.trainingBestFor}><strong>Best For:</strong> {t.bestFor}</div>
                       <a href="https://wa.me/2348153687589?text=I want to enroll in the course" target="_blank" style={styles.serviceBtn}>Enroll Now →</a>
                     </div>
                   ))}
@@ -346,7 +390,6 @@ export default function App() {
           </div>
         )}
 
-        {/* ── CONTACT ── */}
         {active === "Contact" && (
           <div>
             <section style={styles.hero}>
@@ -382,7 +425,7 @@ export default function App() {
                     {[
                       ["📱", "WhatsApp", "+234 815 368 7589", "https://wa.me/2348153687589"],
                       ["📧", "Email", "bilongdigitalhub@gmail.com", "mailto:bilongdigitalhub@gmail.com"],
-                      ["📍", "Location", "Oyo State & Lagos, Nigeria — Serving All Africa", null],
+                      ["🌍", "Coverage", "Serving Businesses Worldwide", null],
                     ].map(([icon, label, value, link]) => (
                       <div key={label} style={styles.contactItem}>
                         <span style={styles.contactIcon}>{icon}</span>
@@ -406,10 +449,10 @@ export default function App() {
         )}
       </main>
 
-      {/* FOOTER */}
       <footer style={styles.footer}>
         <div style={styles.footerInner}>
           <div style={styles.footerBrand}>
+            <img src="/bilong_real_logo.jpg" alt="logo" style={{ width: 44, height: 44, borderRadius: 10, marginBottom: 8, objectFit: "cover" }} />
             <div style={styles.navName}>BILONG DIGITAL HUB</div>
             <div style={styles.navSub}>Educate. Innovate. Elevate. Connect.</div>
           </div>
@@ -421,6 +464,7 @@ export default function App() {
           <div style={styles.footerContact}>
             <div style={{ color: "#A8C8F0", fontSize: 13 }}>© 2026 BILONG DIGITAL HUB</div>
             <div style={{ color: "#A8C8F0", fontSize: 13 }}>Olawumi Micheal Damilare</div>
+            <div style={{ color: "#A8C8F0", fontSize: 13 }}>🌍 Serving Businesses Worldwide</div>
           </div>
         </div>
       </footer>
@@ -433,7 +477,7 @@ const styles = {
   nav: { background: "#0A2342", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 2px 20px rgba(0,0,0,0.3)" },
   navInner: { maxWidth: 1200, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 70 },
   navBrand: { display: "flex", alignItems: "center", gap: 10 },
-  navLogo: { fontSize: 28 },
+  navLogoImg: { width: 44, height: 44, borderRadius: 10, objectFit: "cover" },
   navName: { color: "#fff", fontWeight: 800, fontSize: 16, letterSpacing: 1 },
   navSub: { color: "#A8C8F0", fontSize: 10, letterSpacing: 1 },
   navLinks: { display: "flex", gap: 4 },
@@ -443,6 +487,7 @@ const styles = {
   main: { minHeight: "calc(100vh - 70px)" },
   hero: { background: "linear-gradient(135deg, #071628 0%, #0A2342 60%, #0d2d52 100%)", padding: "80px 24px" },
   heroInner: { maxWidth: 800, margin: "0 auto", textAlign: "center" },
+  heroLogo: { width: 90, height: 90, borderRadius: 18, objectFit: "cover", marginBottom: 20, border: "2px solid rgba(30,144,255,0.4)" },
   heroBadge: { display: "inline-block", background: "rgba(30,144,255,0.15)", color: "#1E90FF", padding: "6px 16px", borderRadius: 20, fontSize: 13, fontWeight: 600, marginBottom: 20, border: "1px solid rgba(30,144,255,0.3)" },
   heroTitle: { fontSize: 52, fontWeight: 900, color: "#fff", lineHeight: 1.1, marginBottom: 20 },
   heroBlue: { color: "#1E90FF" },
@@ -463,30 +508,27 @@ const styles = {
   gapIcon: { fontSize: 32, display: "block", marginBottom: 12 },
   gapTitle: { fontSize: 16, fontWeight: 700, color: "#0A2342", marginBottom: 8 },
   gapDesc: { fontSize: 14, color: "#6b7280", lineHeight: 1.6 },
-  fwGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 },
-  fwCard: { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(30,144,255,0.2)", borderRadius: 12, padding: 24 },
-  fwNum: { fontSize: 48, fontWeight: 900, color: "rgba(30,144,255,0.25)", lineHeight: 1, marginBottom: 8 },
-  fwTitle: { fontSize: 16, fontWeight: 700, color: "#fff", marginBottom: 10 },
-  fwDesc: { fontSize: 13, color: "#A8C8F0", lineHeight: 1.6 },
   ctaSection: { background: "#1E90FF", padding: "64px 24px", textAlign: "center" },
   ctaTitle: { fontSize: 40, fontWeight: 900, color: "#fff", marginBottom: 12 },
   ctaSub: { fontSize: 18, color: "rgba(255,255,255,0.85)", marginBottom: 32 },
-  servicesGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 },
+  servicesGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 },
   serviceCard: { background: "#fff", border: "1px solid #e8edf4", borderRadius: 12, padding: 24, display: "flex", flexDirection: "column", gap: 8 },
   serviceIcon: { fontSize: 32 },
   serviceName: { fontSize: 16, fontWeight: 700, color: "#0A2342" },
-  serviceDesc: { fontSize: 13, color: "#6b7280", lineHeight: 1.6, flex: 1 },
-  servicePrice: { fontSize: 14, fontWeight: 700, color: "#1E90FF" },
-  serviceBtn: { background: "#0A2342", color: "#fff", padding: "10px 16px", borderRadius: 8, textDecoration: "none", fontSize: 13, fontWeight: 600, textAlign: "center" },
+  serviceDesc: { fontSize: 13, color: "#6b7280", lineHeight: 1.6 },
+  serviceList: { listStyle: "none", padding: 0, margin: 0, flex: 1 },
+  serviceItem: { fontSize: 13, color: "#374151", padding: "3px 0" },
+  serviceBtn: { background: "#0A2342", color: "#fff", padding: "10px 16px", borderRadius: 8, textDecoration: "none", fontSize: 13, fontWeight: 600, textAlign: "center", marginTop: 8 },
+  serviceNote: { marginTop: 32, background: "#f0f6ff", border: "1px solid #1E90FF", borderRadius: 10, padding: "16px 20px", fontSize: 14, color: "#0A2342", fontWeight: 500 },
   chatBox: { background: "#fff", borderRadius: 16, overflow: "hidden", border: "1px solid #e8edf4", boxShadow: "0 4px 24px rgba(0,0,0,0.08)" },
-  chatHeader: { background: "#0A2342", padding: "16px 20px", display: "flex", alignItems: "center", gap: 12, fontSize: 24 },
+  chatHeader: { background: "#0A2342", padding: "16px 20px", display: "flex", alignItems: "center", gap: 12 },
   chatHeaderName: { color: "#fff", fontWeight: 700, fontSize: 15 },
   chatHeaderSub: { color: "#A8C8F0", fontSize: 12 },
   chatMessages: { padding: 20, minHeight: 360, maxHeight: 400, overflowY: "auto", display: "flex", flexDirection: "column", gap: 12 },
   chatMsg: { display: "flex", alignItems: "flex-end", gap: 8 },
   chatMsgUser: { flexDirection: "row-reverse" },
   chatMsgAI: { flexDirection: "row" },
-  chatAvatar: { fontSize: 24, flexShrink: 0 },
+  chatAvatar: { width: 32, height: 32, borderRadius: 8, objectFit: "cover", flexShrink: 0 },
   chatBubble: { maxWidth: "75%", padding: "12px 16px", borderRadius: 12, fontSize: 14, lineHeight: 1.6 },
   chatBubbleAI: { background: "#f0f6ff", color: "#0A2342", borderRadius: "4px 12px 12px 12px" },
   chatBubbleUser: { background: "#1E90FF", color: "#fff", borderRadius: "12px 4px 12px 12px" },
@@ -495,19 +537,21 @@ const styles = {
   chatSend: { background: "#1E90FF", color: "#fff", border: "none", padding: "12px 24px", borderRadius: 8, fontWeight: 700, cursor: "pointer" },
   chatSuggestions: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 16 },
   chatSugBtn: { background: "#f0f6ff", color: "#1E90FF", border: "1px solid #1E90FF", padding: "8px 14px", borderRadius: 20, fontSize: 12, cursor: "pointer", fontWeight: 500 },
-  trainingGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 },
+  trainingGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 },
   trainingCard: { background: "#fff", border: "1px solid #e8edf4", borderRadius: 12, padding: 24, display: "flex", flexDirection: "column", gap: 10 },
-  trainingPrice: { fontSize: 28, fontWeight: 900, color: "#1E90FF" },
-  trainingTitle: { fontSize: 15, fontWeight: 700, color: "#0A2342" },
-  trainingSessions: { fontSize: 12, color: "#6b7280", fontWeight: 600 },
+  trainingCardFeatured: { border: "2px solid #1E90FF", background: "#f0f6ff" },
+  trainingBadge: { background: "#1E90FF", color: "#fff", fontSize: 11, fontWeight: 700, padding: "4px 12px", borderRadius: 20, alignSelf: "flex-start" },
+  trainingTitle: { fontSize: 22, fontWeight: 900, color: "#0A2342" },
+  trainingSub: { fontSize: 13, color: "#1E90FF", fontWeight: 600 },
   trainingItems: { flex: 1, display: "flex", flexDirection: "column", gap: 6 },
-  trainingItem: { fontSize: 13, color: "#374151" },
+  trainingItem: { fontSize: 13, color: "#374151", lineHeight: 1.5 },
+  trainingNote: { fontSize: 12, color: "#f59e0b", background: "#fffbeb", padding: "8px 12px", borderRadius: 6, border: "1px solid #fcd34d" },
+  trainingBestFor: { fontSize: 13, color: "#6b7280", fontStyle: "italic", padding: "8px 0", borderTop: "1px solid #e8edf4" },
   aboutGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48 },
   aboutText: { fontSize: 15, color: "#6b7280", lineHeight: 1.8 },
   pillars: { display: "flex", gap: 12, flexWrap: "wrap" },
   pillar: { background: "#1E90FF", color: "#fff", padding: "8px 20px", borderRadius: 20, fontWeight: 700, fontSize: 14 },
   aboutFw: { display: "flex", gap: 16, marginBottom: 20, alignItems: "flex-start" },
-  aboutFwNum: { fontSize: 36, fontWeight: 900, color: "rgba(30,144,255,0.2)", flexShrink: 0, lineHeight: 1 },
   aboutFwTitle: { fontSize: 15, fontWeight: 700, color: "#0A2342", marginBottom: 6 },
   contactGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48 },
   formInput: { display: "block", width: "100%", padding: "12px 16px", borderRadius: 8, border: "1px solid #e8edf4", fontSize: 14, marginBottom: 12, boxSizing: "border-box" },
